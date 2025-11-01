@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Inscription — Quingey</title>
+  <style>
+    body{font-family:Segoe UI, Roboto, Helvetica, Arial, sans-serif;background:#f6f7fb;color:#111;margin:0;padding:0}
+    .container{max-width:720px;margin:32px auto;padding:20px}
+    .card{background:#fff;padding:20px;border-radius:8px;box-shadow:0 6px 20px rgba(10,10,30,0.06)}
+    label{display:block;margin-top:12px;font-weight:600}
+    input[type=text], input[type=email], textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;margin-top:6px}
+    button{background:#2b6cb0;color:#fff;border:none;padding:10px 14px;border-radius:6px;margin-top:14px;cursor:pointer}
+    .success{background:#e6fffa;border:1px solid #b7f5e9;padding:12px;border-radius:6px;color:#064e3b}
+    a.back{display:inline-block;margin-top:12px;color:#2b6cb0;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Formulaire d'inscription</h1>
+
+      {% if submitted %}
+      <div class="success">
+        <p>Merci{% if name %}, {{ name }}{% endif %} — votre inscription a bien été reçue.</p>
+        {% if email %}<p>Nous avons envoyé une confirmation à : <strong>{{ email }}</strong></p>{% endif %}
+        <p><a class="back" href="/">← Retour à l'accueil</a></p>
+      </div>
+      {% else %}
+      <form method="post" action="">
+        {% csrf_token %}
+        <label for="id_name">Nom</label>
+        <input id="id_name" name="name" type="text" placeholder="Votre nom">
+
+        <label for="id_email">Email</label>
+        <input id="id_email" name="email" type="email" placeholder="votre@email.com">
+
+        <label for="id_message">Message (optionnel)</label>
+        <textarea id="id_message" name="message" rows="4" placeholder="Un message facultatif..."></textarea>
+
+        <button type="submit">S'inscrire</button>
+      </form>
+      <p style="margin-top:12px"><a class="back" href="/">← Retour à l'accueil</a></p>
+      {% endif %}
+
+    </div>
+  </div>
+</body>
+</html>
