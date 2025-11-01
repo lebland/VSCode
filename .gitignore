@@ -1,0 +1,150 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Install / packaging
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+pip-wheel-metadata/
+*.egg-info
+wheelhouse/
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+pytestdebug.log
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+media/
+staticfiles/
+static/
+# If using Django collectstatic in development, ignore collected files
+/staticfiles/
+/static/
+
+# Environment variables
+.env
+.env.*
+.envrc
+
+# Pyre type checker
+.pyre/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# Editors
+*~
+*.swp
+*.swo
+*.swn
+*.tmp
+*.bak
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Celery
+celerybeat-schedule
+
+# SageMath parsed files
+*.sobj
+
+# Distribution / packaging
+*.egg-info/
+.installed.cfg
+*.egg
+
+# C extensions
+*.c
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+*.pyo
+*.pyd
+
+# Profiling data
+.prof
+
+# Coverage reports
+.coverage
+.cache/
+
+# Environment folders created by common tools
+.env/
+.venv/
+venv/
+env/
+
+# Temporary files
+tmp/
+temp/
+
+# Pipenv
+Pipfile.lock
+
+# poetry
+.poetry/
+
+# node modules (if frontend inside project)
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# SQLite database
+*.sqlite3
+
+# Django migrations (optionally ignore if you commit migrations)
+# Uncomment if you don't want to commit migrations
+# */migrations/*.py
+# */migrations/*.pyc
+
+# End of file
