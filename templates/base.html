@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}Quingey{% endblock %}</title>
+  <meta name="description" content="{% block description %}Découvrir Quingey : histoire, lieux d'intérêt, événements et conseils de visite.{% endblock %}">
+  <style>
+    :root {
+      --bg: #f7f7f9;
+      --card: #fff;
+      --accent: #2b6cb0;
+      --muted: #555;
+      --nav-height: 64px;
+      --nav-bg: rgba(255,255,255,0.98);
+    }
+    body {
+      font-family: Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: #222;
+      margin: 0;
+      padding: 0;
+      padding-top: var(--nav-height);
+    }
+    /* Navbar styles */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      background: var(--nav-bg);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .nav-logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-link {
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-link:hover {
+      color: var(--accent);
+    }
+    .nav-button {
+      background: var(--accent);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.2s;
+    }
+    .nav-button:hover {
+      background: #2457a0;
+    }
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      padding: 8px;
+      cursor: pointer;
+      color: #333;
+    }
+    /* Mobile menu */
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: block;
+      }
+      .nav-menu {
+        display: none;
+        position: fixed;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        background: var(--nav-bg);
+        padding: 16px;
+        flex-direction: column;
+        gap: 16px;
+        border-top: 1px solid rgba(0,0,0,0.1);
+      }
+      .nav-menu.active {
+        display: flex;
+      }
+    }
+    /* Other common styles */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    {% block extra_styles %}{% endblock %}
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-brand">
+        <span class="nav-logo">Q</span>
+        <span style="font-weight:600;color:#333">Quingey</span>
+      </a>
+      
+      <button class="nav-toggle" onclick="toggleMenu()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="/" class="nav-link">Accueil</a></li>
+        <li><a href="/#histoire" class="nav-link">Histoire</a></li>
+        <li><a href="/#visiter" class="nav-link">Visiter</a></li>
+        <li><a href="/#contact" class="nav-link">Contact</a></li>
+        <li><a href="/inscription/" class="nav-button">S'inscrire</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  {% block content %}{% endblock %}
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('nav-menu');
+      menu.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
