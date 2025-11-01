@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}{{ event.title }} — Quingey{% endblock %}
+
+{% block extra_styles %}
+.event-hero {
+  background: linear-gradient(90deg,var(--accent),#2762a3);
+  color: white;
+  padding: 48px 0;
+  margin: -24px 0 24px;
+}
+.event-meta {
+  display: flex;
+  gap: 24px;
+  color: rgba(255,255,255,0.9);
+  margin-top: 12px;
+}
+.event-meta > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+}
+.btn-outline-white {
+  border: 1px solid rgba(255,255,255,0.5);
+  color: white;
+}
+.btn-outline-white:hover {
+  background: rgba(255,255,255,0.1);
+}
+.event-content {
+  background: var(--card);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+{% endblock %}
+
+{% block content %}
+<div class="event-hero">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start">
+      <div>
+        <h1 style="margin:0">{{ event.title }}</h1>
+        <div class="event-meta">
+          <div>📅 {{ event.date|date:"d F Y à H:i" }}</div>
+          <div>📍 {{ event.location }}</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px">
+        <a href="{% url 'event-update' event.pk %}" class="btn btn-outline-white">Modifier</a>
+        <a href="{% url 'event-delete' event.pk %}" class="btn btn-outline-white">Supprimer</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="event-content">
+    {{ event.description|linebreaks }}
+  </div>
+
+  <div style="margin:24px 0">
+    <a href="{% url 'event-list' %}" class="btn btn-outline">← Retour aux événements</a>
+  </div>
+</div>
+{% endblock %}

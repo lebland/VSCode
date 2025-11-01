@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block title %}Événements à Quingey{% endblock %}
+
+{% block extra_styles %}
+.event-list {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+.event-card {
+  background: var(--card);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  padding: 20px;
+  transition: transform 0.2s;
+}
+.event-card:hover {
+  transform: translateY(-2px);
+}
+.event-date {
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.event-location {
+  color: var(--muted);
+  font-size: 0.9em;
+  margin: 8px 0;
+}
+.event-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+.btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9em;
+}
+.btn-primary {
+  background: var(--accent);
+  color: white;
+}
+.btn-outline {
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+.alert {
+  background: #e6fffa;
+  border: 1px solid #b7f5e9;
+  color: #064e3b;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+.alert-error {
+  background: #fee2e2;
+  border-color: #fecaca;
+  color: #991b1b;
+}
+.add-event {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--accent);
+  color: white;
+  width: 56px;
+  height: 56px;
+  border-radius: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(43,108,176,0.2);
+  text-decoration: none;
+  font-size: 24px;
+  transition: transform 0.2s;
+}
+.add-event:hover {
+  transform: scale(1.05);
+}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+    <h1>Événements à Quingey</h1>
+  </div>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="event-list">
+    {% for event in events %}
+      <article class="event-card">
+        <div class="event-date">{{ event.date|date:"d F Y à H:i" }}</div>
+        <h3 style="margin:0">{{ event.title }}</h3>
+        <div class="event-location">{{ event.location }}</div>
+        <p style="margin:8px 0">{{ event.description|truncatewords:30 }}</p>
+        <div class="event-actions">
+          <a href="{% url 'event-detail' event.pk %}" class="btn btn-primary">Voir plus</a>
+          <a href="{% url 'event-update' event.pk %}" class="btn btn-outline">Modifier</a>
+        </div>
+      </article>
+    {% empty %}
+      <div style="grid-column:1/-1;text-align:center;padding:40px 20px;color:var(--muted)">
+        <p>Aucun événement à venir pour le moment.</p>
+      </div>
+    {% endfor %}
+  </div>
+
+  <a href="{% url 'event-create' %}" class="add-event" title="Ajouter un événement">+</a>
+</div>
+{% endblock %}

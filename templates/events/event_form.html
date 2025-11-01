@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}{% if form.instance.pk %}Modifier{% else %}Nouvel{% endif %} événement — Quingey{% endblock %}
+
+{% block extra_styles %}
+.form-card {
+  background: var(--card);
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.field {
+  margin-bottom: 16px;
+}
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1em;
+}
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+.help {
+  color: var(--muted);
+  font-size: 0.9em;
+  margin-top: 4px;
+}
+.btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1em;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--accent);
+  color: white;
+}
+.btn-outline {
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
+.error {
+  color: #dc2626;
+  font-size: 0.9em;
+  margin-top: 4px;
+}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="form-card">
+    <h1>{% if form.instance.pk %}Modifier{% else %}Nouvel{% endif %} événement</h1>
+
+    <form method="post">
+      {% csrf_token %}
+      
+      {% for field in form %}
+        <div class="field">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.help_text %}
+            <div class="help">{{ field.help_text }}</div>
+          {% endif %}
+          {% if field.errors %}
+            {% for error in field.errors %}
+              <div class="error">{{ error }}</div>
+            {% endfor %}
+          {% endif %}
+        </div>
+      {% endfor %}
+
+      <div style="display:flex;gap:12px;margin-top:24px">
+        <button type="submit" class="btn btn-primary">
+          {% if form.instance.pk %}Enregistrer{% else %}Créer{% endif %}
+        </button>
+        <a href="{% url 'event-list' %}" class="btn btn-outline">Annuler</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

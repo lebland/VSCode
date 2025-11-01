@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Supprimer {{ event.title }} — Quingey{% endblock %}
+
+{% block extra_styles %}
+.delete-card {
+  background: var(--card);
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+.btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1em;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-danger {
+  background: #dc2626;
+  color: white;
+}
+.btn-outline {
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="delete-card">
+    <h1>Supprimer l'événement</h1>
+    
+    <p>Voulez-vous vraiment supprimer l'événement "{{ event.title }}" du {{ event.date|date:"d F Y" }} ?</p>
+    <p style="color:var(--muted)">Cette action est irréversible.</p>
+
+    <form method="post" style="margin-top:24px">
+      {% csrf_token %}
+      <div style="display:flex;gap:12px;justify-content:center">
+        <button type="submit" class="btn btn-danger">Confirmer la suppression</button>
+        <a href="{% url 'event-detail' event.pk %}" class="btn btn-outline">Annuler</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

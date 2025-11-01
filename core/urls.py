@@ -17,10 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.views.generic import TemplateView
-from .views import register
+from .views import (
+    register, EventListView, EventDetailView,
+    EventCreateView, EventUpdateView, EventDeleteView
+)
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='quingey_home.html'), name='home'),
     path('inscription/', register, name='inscription'),
+    path('evenements/', EventListView.as_view(), name='event-list'),
+    path('evenements/<int:pk>/', EventDetailView.as_view(), name='event-detail'),
+    path('evenements/nouveau/', EventCreateView.as_view(), name='event-create'),
+    path('evenements/<int:pk>/modifier/', EventUpdateView.as_view(), name='event-update'),
+    path('evenements/<int:pk>/supprimer/', EventDeleteView.as_view(), name='event-delete'),
     path('admin/', admin.site.urls),
 ]
