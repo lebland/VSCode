@@ -28,7 +28,7 @@ python -m pip install --upgrade pip
 ## 🧰 3. Création de l’environnement virtuel
 Dans le dossier du projet :
 ```powershell
-python -m venv .venv
+events/event_list.html
 ```
 
 Active l’environnement virtuel :
